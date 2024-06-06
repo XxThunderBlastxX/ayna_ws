@@ -11,6 +11,16 @@ AppBar chatHomeAppBar({
   required void Function() onNewChat,
 }) {
   return AppBar(
+    toolbarHeight: 68,
+    backgroundColor: AppTheme.kLightBlueColor,
+    bottom: const PreferredSize(
+      preferredSize: Size.fromHeight(0),
+      child: Divider(
+        height: 0,
+        thickness: 1,
+        color: Colors.black87,
+      ),
+    ),
     actions: [
       ElevatedButton(
         onPressed: () => showDialog(

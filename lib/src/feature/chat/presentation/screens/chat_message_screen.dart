@@ -1,3 +1,4 @@
+import 'package:ayna_ws_assignment/src/app/theme/theme.dart';
 import 'package:ayna_ws_assignment/src/feature/chat/data/repository/websocket_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,6 +72,15 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
             case WebsocketConnected(messageList: final messageList):
               return Scaffold(
                 appBar: AppBar(
+                  toolbarHeight: 48,
+                  backgroundColor: AppTheme.kPurpleColor,
+                  bottom: const PreferredSize(
+                    preferredSize: Size.fromHeight(0),
+                    child: Divider(
+                      height: 1,
+                      color: Colors.black87,
+                    ),
+                  ),
                   title: Text('Chat Message ${widget.id}'),
                 ),
                 body: Column(
@@ -83,7 +93,7 @@ class _ChatMessageScreenState extends State<ChatMessageScreen> {
                             height:
                                 MediaQuery.of(context).viewInsets.bottom == 0
                                     ? _screenSize.height * 0.8
-                                    : _screenSize.height * 0.47,
+                                    : _screenSize.height * 0.4,
                             child: ListView.builder(
                               itemCount: messageList.length,
                               keyboardDismissBehavior:

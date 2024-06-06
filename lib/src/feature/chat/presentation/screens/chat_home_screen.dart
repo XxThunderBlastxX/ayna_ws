@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/service/service_locator.dart';
@@ -68,11 +69,13 @@ class _ChatHomeScreenState extends State<ChatHomeScreen> {
               ),
               body: Column(
                 children: [
-                  const Divider(),
+                  const Gap(12),
                   state.chatSessionId.isEmpty
-                      ? const Center(
+                      ? Center(
                           child: Text(
-                              "Opps, Not chat yet !!!\nChat by pressing \"New Chat\" button"),
+                            "Opps, Not Chatted yet !!!\nChat by pressing \"New Chat\" button",
+                            style: AppTheme.theme.textTheme.labelMedium,
+                          ),
                         )
                       : Expanded(
                           child: ListView.builder(
