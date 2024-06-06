@@ -1,9 +1,9 @@
-import 'package:ayna_ws_assignment/src/app/theme/theme.dart';
-import 'package:ayna_ws_assignment/src/feature/chat/data/repository/websocket_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../app/service/service_locator.dart';
+import '../../../../app/theme/theme.dart';
+import '../../data/repository/websocket_repository.dart';
 import '../bloc/message/message_bloc.dart';
 import 'widget/chat_bubble.dart';
 import 'widget/send_text_tile.dart';
