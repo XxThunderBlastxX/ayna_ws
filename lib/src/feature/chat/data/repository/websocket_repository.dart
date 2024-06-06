@@ -8,9 +8,12 @@ class WebsocketRepository extends IWebsocket {
   WebsocketRepository(WebSocketChannel channel) : _channel = channel;
 
   @override
-  Future<WebSocketChannel> connect() async {
-    await _channel.ready;
-    return _channel;
+  Future<WebsocketRepository> connect() async {
+    final ws = WebsocketRepository(WebSocketChannel.connect(
+      Uri.parse("wss://echo.websocket.org/"),
+    ));
+    await ws._channel.ready;
+    return ws;
   }
 
   @override

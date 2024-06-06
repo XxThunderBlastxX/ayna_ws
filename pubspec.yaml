@@ -47,6 +47,7 @@ dependencies:
   gap: ^3.0.1
   shared_preferences: ^2.2.3
   parse_json: ^2.2.3
+  async: ^2.11.0
 
 dev_dependencies:
   flutter_test:
