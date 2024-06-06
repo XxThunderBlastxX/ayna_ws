@@ -312,6 +312,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.0"
+  parse_json:
+    dependency: "direct main"
+    description:
+      name: parse_json
+      sha256: "37e89891d286abf76d676b5f7c7caf5c871f507e02d377ee010741d0271becc1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.3"
   path:
     dependency: transitive
     description:
