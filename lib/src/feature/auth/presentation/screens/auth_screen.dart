@@ -70,7 +70,7 @@ class _AuthScreenState extends State<AuthScreen> {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () => context.go('/auth/signup'),
+                onPressed: () => context.push('/auth/signup'),
                 child: Text(
                   'SIGN UP',
                   style: AppTheme.theme.textTheme.labelMedium!.copyWith(

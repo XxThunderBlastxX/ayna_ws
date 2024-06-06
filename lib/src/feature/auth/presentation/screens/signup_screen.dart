@@ -5,9 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/common/widget/styled_form_field.dart';
-import '../../../../app/service/service_locator.dart';
 import '../../../../app/theme/theme.dart';
-import '../../data/repository/auth_repository.dart';
 import '../bloc/auth_bloc.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -45,93 +43,94 @@ class _SignupScreenState extends State<SignupScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(authRepo: sl<AuthRepository>()),
-      child: BlocConsumer<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSuccess) {
-            context.go('/home');
-          } else if (state is AuthFailure) {
-            context.errorBanner(
-              state.failure.message,
-              statusCode: state.failure.code,
-            );
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'Signup',
-                style: AppTheme.theme.textTheme.labelLarge,
-              ),
-            ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24.0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    const Gap(24),
-                    StyledFormField(
-                      label: 'Username',
-                      icon: const Icon(Icons.person),
-                      controller: _usernameController,
-                    ),
-                    const Gap(12),
-                    StyledFormField(
-                      label: 'Email',
-                      icon: const Icon(Icons.email),
-                      controller: _emailController,
-                    ),
-                    const Gap(12),
-                    StyledFormField(
-                      label: 'Password',
-                      icon: const Icon(Icons.lock),
-                      controller: _passwordController,
-                      obscureText: true,
-                    ),
-                    const Gap(12),
-                    StyledFormField(
-                      label: 'Rewrite Password',
-                      icon: const Icon(Icons.lock),
-                      controller: _rewritePasswordController,
-                      obscureText: true,
-                      validator: (val) {
-                        if (val != _passwordController.text) {
-                          return 'Enter the same password as above';
-                        }
-                        return null;
-                      },
-                    ),
-                    const Gap(24),
-                    (state is AuthLoading)
-                        ? const CircularProgressIndicator()
-                        : ElevatedButton(
-                            onPressed: () => onSubmit(),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Signup',
-                                style: AppTheme.theme.textTheme.labelMedium,
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthSuccess) {
+          context.go('/home');
+        } else if (state is AuthFailure) {
+          context.errorBanner(
+            state.failure.message,
+            statusCode: state.failure.code,
+          );
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Create an Account',
+                  style: AppTheme.theme.textTheme.displayLarge,
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      const Gap(24),
+                      StyledFormField(
+                        label: 'Username',
+                        icon: const Icon(Icons.person),
+                        controller: _usernameController,
+                      ),
+                      const Gap(12),
+                      StyledFormField(
+                        label: 'Email',
+                        icon: const Icon(Icons.email),
+                        controller: _emailController,
+                      ),
+                      const Gap(12),
+                      StyledFormField(
+                        label: 'Password',
+                        icon: const Icon(Icons.lock),
+                        controller: _passwordController,
+                        obscureText: true,
+                      ),
+                      const Gap(12),
+                      StyledFormField(
+                        label: 'Rewrite Password',
+                        icon: const Icon(Icons.lock),
+                        controller: _rewritePasswordController,
+                        obscureText: true,
+                        validator: (val) {
+                          if (val != _passwordController.text) {
+                            return 'Enter the same password as above';
+                          }
+                          return null;
+                        },
+                      ),
+                      const Gap(24),
+                      (state is AuthLoading)
+                          ? const CircularProgressIndicator()
+                          : ElevatedButton(
+                              onPressed: () => onSubmit(),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  'Signup',
+                                  style: AppTheme.theme.textTheme.labelMedium,
+                                ),
                               ),
                             ),
-                          ),
-                    const Gap(8),
-                    TextButton(
-                      onPressed: () => context.pushReplacement('/login'),
-                      child: Text(
-                        'Already have an account? Login',
-                        style: AppTheme.theme.textTheme.labelSmall,
+                      const Gap(8),
+                      TextButton(
+                        onPressed: () => context.pushReplacement('/login'),
+                        child: Text(
+                          'Already have an account? Login',
+                          style: AppTheme.theme.textTheme.labelSmall,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 

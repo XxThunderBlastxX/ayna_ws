@@ -5,10 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../app/common/widget/styled_form_field.dart';
-import '../../../../app/service/service_locator.dart';
-import '../../../../app/service/supabase_service.dart';
 import '../../../../app/theme/theme.dart';
-import '../../data/repository/auth_repository.dart';
 import '../bloc/auth_bloc.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -38,34 +35,31 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(
-        authRepo: AuthRepository(client: sl<SupabaseService>().client),
-      ),
-      child: BlocConsumer<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSuccess) {
-            context.go("/home");
-          } else if (state is AuthFailure) {
-            context.errorBanner(
-              state.failure.message,
-              statusCode: state.failure.code,
-            );
-          }
-        },
-        builder: (context, state) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'Login',
-                style: AppTheme.theme.textTheme.labelLarge,
-              ),
-            ),
-            body: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Form(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 24.0),
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (context, state) {
+        if (state is AuthSuccess) {
+          context.go("/home");
+        } else if (state is AuthFailure) {
+          context.errorBanner(
+            state.failure.message,
+            statusCode: state.failure.code,
+          );
+        }
+      },
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppBar(),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Login',
+                  style: AppTheme.theme.textTheme.displayLarge,
+                ),
+                const Gap(24),
+                Form(
                   child: Column(
                     children: [
                       StyledFormField(
@@ -100,7 +94,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                               ),
                             ),
-                      const Gap(12),
                       TextButton(
                         onPressed: () => context.push('/signup'),
                         child: Text(
@@ -111,11 +104,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-              ),
+              ],
             ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }
