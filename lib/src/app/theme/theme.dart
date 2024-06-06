@@ -40,18 +40,18 @@ class AppTheme {
     ),
     fontFamily: GoogleFonts.roboto().fontFamily,
     textTheme: TextTheme(
-      bodyLarge: GoogleFonts.roboto(
+      displayLarge: GoogleFonts.roboto(
+        fontSize: 24,
+        fontWeight: FontWeight.w500,
+        color: Colors.black87,
+      ),
+      displayMedium: GoogleFonts.roboto(
         fontSize: 18,
         fontWeight: FontWeight.w500,
         color: Colors.black87,
       ),
-      bodyMedium: GoogleFonts.roboto(
+      displaySmall: GoogleFonts.roboto(
         fontSize: 15,
-        fontWeight: FontWeight.w500,
-        color: Colors.black87,
-      ),
-      bodySmall: GoogleFonts.roboto(
-        fontSize: 12,
         fontWeight: FontWeight.w500,
         color: Colors.black87,
       ),
