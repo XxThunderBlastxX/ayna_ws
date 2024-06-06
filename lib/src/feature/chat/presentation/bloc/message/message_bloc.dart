@@ -70,6 +70,7 @@ class MessageBloc extends Bloc<MessageEvent, MessageState> {
             channel: final channel,
             subscription: final subscription,
           ):
+          print(event.message);
           channel.send(event.message);
 
           final allMessageList = getCachedObjectList<MessageModal>(
